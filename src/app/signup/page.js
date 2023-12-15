@@ -38,7 +38,7 @@ const Page = () => {
         try {
             const data = await signUp(formData);
             console.log(data);
-            route.push('/')
+            router.push('/')
         } catch(err) {
             console.error('Error during registration: ',err);
         }
