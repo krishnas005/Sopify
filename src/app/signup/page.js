@@ -5,8 +5,12 @@ import SelectComponent from "@/components/FormElements/SelectComponent"
 import { signUp } from "@/services/signup";
 import { registrationFormControls } from "@/utils"
 import Link from "next/link"
-import { useState } from "react"
+import { useContext,useState,useEffect } from "react"
 import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
+import { GlobalContext } from "@/context";
+import Notification from "@/components/Notification";
+import ComponentLevelLoader from "@/components/ComponentLoader";
 
 const initialForm = {
     name:'',
@@ -18,6 +22,8 @@ const initialForm = {
 const Page = () => {
 
     const router = useRouter();
+    const [isRegistered, setIsRegistered] = useState(false);
+    const { pageLevelLoader, setPageLevelLoader , isAuthUser } = useContext(GlobalContext);
 
     const [formData,setFormData] = useState(initialForm);
 
@@ -34,16 +40,28 @@ const Page = () => {
         }
 
     async function handleRegister(e) {
-        e.preventDefault();
-        try {
-            const data = await signUp(formData);
-            console.log(data);
-            router.push('/')
-        } catch(err) {
-            console.error('Error during registration: ',err);
+        setPageLevelLoader(true);
+        const data = await signUp(formData);
+        
+        if (data.success) {
+            toast.success(data.message, {
+            position: toast.POSITION.TOP_RIGHT,
+            });
+            setIsRegistered(true);
+            setPageLevelLoader(false);
+            setFormData(initialForm);
+        } else {
+            toast.error(data.message, {
+            position: toast.POSITION.TOP_RIGHT,
+            });
+            setPageLevelLoader(false);
+            setFormData(initialForm);
         }
     }
     
+    useEffect(() => {
+        if (isAuthUser) router.push("/");
+      }, [isAuthUser]);
 
     // console.log(formData)
     
@@ -91,7 +109,15 @@ const Page = () => {
                                 disabled={!isFormValid()}
                                 onClick={handleRegister}
                                 >
-                                    Register
+                                    {pageLevelLoader ? (
+                                    <ComponentLevelLoader
+                                    text={"Registering"}
+                                    color={"#ffffff"}
+                                    loading={pageLevelLoader}
+                                    />
+                                ) : (
+                                    "Register"
+                                )}
                                 </button>
                                 <div className="text-center">
                                     Already have an account? <Link href="/login" className="text-blue-500 font-semibold">Login</Link>
@@ -101,6 +127,7 @@ const Page = () => {
                 </div>
             </div>
         </div>
+        <Notification/>
     </div>
     )
 }

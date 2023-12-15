@@ -55,7 +55,7 @@ export default function Navbar() {
         <nav className="bg-white fixed w-full z-20 top-0 left-0 border-b border-gray-200">
             <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
                 <div className="flex items-center cursor-pointer">
-                    <span className="self-center text-2xl font-semibold whitespace-nowrap">
+                    <span className="self-center text-2xl font-bold whitespace-nowrap">
                         <Link href="/">Sopify</Link>
                     </span>
                 </div>
@@ -72,8 +72,17 @@ export default function Navbar() {
                         : null
                     }
                     {
-                        isAuthUser ? <button onClick={handleLogout}>Logout</button> :
-                        <button onClick={handleLogin}>Login</button>
+                        isAuthUser ? <button
+                        className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium uppercase tracking-wide text-white"
+                        onClick={handleLogout}>
+                            Logout
+                        </button>
+                        :
+                        <button
+                        className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium uppercase tracking-wide text-white"
+                        onClick={handleLogin}>
+                            Login
+                        </button>
                     }
                     <button
                         data-collapse-toggle="navbar-sticky"
