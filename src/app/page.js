@@ -1,10 +1,15 @@
-import Head from 'next/head';
+'use client'
+
+import { GlobalContext } from "@/context"
+import { useContext } from "react"
 
 export default function Home() {
+  const {isAuthUser} = useContext(GlobalContext);
   return (
     <main>
-      <head>Home Page</head>
-      <div>Hello World!</div>
+      <div>
+        
+      </div>
     </main>
   )
 }
