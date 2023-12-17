@@ -3,7 +3,7 @@
 import InputComponent from "@/components/FormElements/InputComponent";
 import { loginFormControls } from "@/utils";
 import Link from "next/link";
-import { useContext, useState } from "react";
+import { useContext, useState,useEffect } from "react";
 import { login } from "@/services/login";
 import { GlobalContext } from "@/context";
 import { useRouter } from "next/navigation";
@@ -58,6 +58,10 @@ const Page = () => {
             setComponentLevelLoader({loading:false,id:""});
         }
     }
+
+    useEffect(() => {
+        if(isAuthUser) router.push('/')
+    },[isAuthUser])
 
     // console.log(isAuthUser,user);
 
