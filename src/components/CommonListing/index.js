@@ -11,7 +11,7 @@ export default function CommonList({ data }) {
     const router = useRouter();
     useEffect(() => {
         router.refresh();
-    }, []);
+    }, [router]);
     return (
         <section className='bg-white py-12 sm:py-16'>
             <div className="mx-auto max-w-screen-xll px-4 sm:px-6 lg:px-8">
@@ -21,6 +21,7 @@ export default function CommonList({ data }) {
                             data.map((item) => (
                                 <article className="relative flex flex-col  cursor-pointer overflow-hidden"
                                 key={item._id}
+                                
                                 >
                                     <ProductTile item={item} />
                                     <ProductButton item={item} />
