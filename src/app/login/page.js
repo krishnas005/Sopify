@@ -96,12 +96,16 @@ const Page = () => {
                                 onClick={handleLogin}
                                 >
                                     {
-                                        componentLevelLoader && componentLevelLoader.loading ? (<ComponentLevelLoader
+                                        componentLevelLoader && componentLevelLoader.loading ?
+                                        (<ComponentLevelLoader
                                         text={"Logging In"}
                                         color={"#ffffff"}
                                         loading={componentLevelLoader && componentLevelLoader.loading}
-                                        />) : ('Login'
-                                    )}
+                                        />) :
+                                        (
+                                            'Login'
+                                        )
+                                    }
                                 </button>
                                 <div className="text-center">
                                     Don&apos;t have an account? <Link href="/signup" className="text-blue-500 font-semibold">Register</Link>

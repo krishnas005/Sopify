@@ -1,8 +1,9 @@
-export const navOptions = [{
-    id: "home",
-    label: "Home",
-    path: "/",
-  },
+export const navOptions = [
+  // {
+  //   id: "home",
+  //   label: "Home",
+  //   path: "/",
+  // },
   {
     id: "listing",
     label: "All Products",
@@ -20,7 +21,7 @@ export const navOptions = [{
   },
   {
     id: "listingKids",
-    label: "kids",
+    label: "Kids",
     path: "/product/listing/kids",
   },
 ];
@@ -179,3 +180,14 @@ export const AvailableSizes = [{
 },
 ];
 
+export const firebaseConfig = {
+  apiKey: "AIzaSyDkRI8nkTDi5toHJeIqCegGHpZRZaO1e2c",
+  authDomain: "sopify-ecommerce.firebaseapp.com",
+  projectId: "sopify-ecommerce",
+  storageBucket: "sopify-ecommerce.appspot.com",
+  messagingSenderId: "945752864272",
+  appId: "1:945752864272:web:48e4be070a61b6c6853c95",
+  measurementId: "G-JW0V35B4R0"
+};
+
+export const firebaseStorageURL = 'gs://sopify-ecommerce.appspot.com'

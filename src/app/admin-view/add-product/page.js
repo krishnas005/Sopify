@@ -76,7 +76,6 @@ export default function AdminAddNewView() {
     const [formData, setFormData] = useState(initialFormData);
     const router = useRouter();
 
-    
 
     const {
         componentLevelLoader,
@@ -84,6 +83,8 @@ export default function AdminAddNewView() {
         currentUpdatedProduct,
         setCurrentUpdatedProduct,
         } = useContext(GlobalContext);
+
+        // console.log(currentUpdatedProduct)
 
         useEffect(() => {
             if (currentUpdatedProduct !== null) setFormData(currentUpdatedProduct);
@@ -124,7 +125,7 @@ export default function AdminAddNewView() {
             ? await updateAProduct(formData)
             : await addNewProduct(formData);
     
-        console.log(res);
+        // console.log(res);
     
         if (res.success) {
             setComponentLevelLoader({ loading: false, id: "" });
@@ -145,18 +146,25 @@ export default function AdminAddNewView() {
             setFormData(initialFormData);
         }
         }
-        console.log(formData);
+        // console.log(formData);
 
     return (
-        <div className="w-full mt-5 mr-0 mb-0 ml-0 relative">
-            <div className="flex flex-col items-start justify-start p-10 bg-white shadow-2xl rounded-xl relative">
+        <div className="w-full mt-5 mr-0 mb-0 ml-0 relative flex justify-center">
+            <div className="flex flex-col items-start justify-start p-10 bg-white shadow-2xl rounded-xl w-full mt-10 mr-0 mb-0 ml-0 relative max-w-2xl lg:mt-0 lg:w-5/12">
+                <h1 className="w-full text-4xl font-medium text-center font-serif">Add New Product</h1>
                 <div className="w-full mt-6 mr-0 mb-0 ml-0 space-y-8">
-                    
+                    <label
+                    id="img"
+                    className="pr-5"
+                    >
+                        Upload image:
+                    </label>
                     <input
                     accept="image/*"
                     max="1000000"
                     type="file"
                     onChange={handleImage}
+                    id="img"
                     />
                     <div className="flex gap-2 flex-col">
                     <label>Available sizes</label>
@@ -177,7 +185,6 @@ export default function AdminAddNewView() {
                             label={controlItem.label}
                             value={formData[controlItem.id]}
                             key={formData[controlItem.label]}
-                            // key={'a'}
                             onChange={(event) => {
                                 setFormData({
                                 ...formData,

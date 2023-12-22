@@ -2,7 +2,7 @@
 
 import { GlobalContext } from "@/context";
 import { adminNavOptions, navOptions } from "@/utils";
-import { Fragment, useContext } from "react";
+import { Fragment, useContext, useEffect } from "react";
 import CommonModel from "./CommonModel";
 import Link from "next/link";
 import {  usePathname, useRouter } from "next/navigation";
@@ -14,7 +14,7 @@ function NavItems({isModalView=false,isAdminView}) {
     const router = useRouter();
     return (
         <div className={`items-center justify-between w-full md:flex md:w-auto ${isModalView ? "" : "hidden"}`} id="nav-items">
-            <ul className={`flex flex-col p-4 md_p-0 mt-4 font-medium  rounded-lg md:flex-row md:space-x-8 md:mt-0 md:border-0 bg-white ${isModalView ? "border-none":"border border-gray-100"}`}>
+            <ul className={`flex flex-col gap-3 p-4 md_p-0 mt-4 font-medium rounded-lg md:flex-row md:space-x-8 md:mt-0 md:border-0 bg-white ${isModalView ? "border-none":"border border-gray-100"}`}>
                 {
                     isAdminView ? adminNavOptions.map(items =>
                     <li
@@ -25,8 +25,9 @@ function NavItems({isModalView=false,isAdminView}) {
                         {items.label}
                     </li> ) :
                     navOptions.map(items =>
-                        <li className="cursor-pointer block py-2 pl-3 pr-4 text-gray-900 rounded md:p-0 "
+                        <li className="cursor-pointer block py-2 pl-3 pr-4 text-gray-900 rounded md:p-0 hover:underline"
                         key = {items.id}
+                        onClick={()=>router.push(items.path)}
                         >
                             {items.label}
                     </li> )
@@ -38,9 +39,13 @@ function NavItems({isModalView=false,isAdminView}) {
 
 export default function Navbar() {
     const {showNavModal,setShowNavModal} = useContext(GlobalContext)
-    const {user,isAuthUser,setIsAuthUser,setUser} = useContext(GlobalContext)
+    const {user,isAuthUser,setIsAuthUser,setUser,currentUpdatedProduct,setCurrentUpdatedProduct} = useContext(GlobalContext)
     const router = useRouter();
     const path = usePathname();
+
+    useEffect(()=>{
+        if(path !== '/admin-view/add-product' && currentUpdatedProduct !== null) {setCurrentUpdatedProduct(null)}
+    },[path])
 
     const isAdminView = path.includes('admin-view');
 

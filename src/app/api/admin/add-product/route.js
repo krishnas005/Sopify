@@ -18,7 +18,9 @@ const AddNewProductSchema = Joi.object({
 export const dynamic = "force-dynamic";
 
 export async function POST(req) {
+
     try {
+
         await connect();
         const user = "admin";
 
@@ -30,7 +32,8 @@ export async function POST(req) {
                 description,
                 price,
                 imageUrl,
-                category,sizes,
+                category,
+                sizes,
                 deliveryInfo,
                 onSale,
                 priceDrop
