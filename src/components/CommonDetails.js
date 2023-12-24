@@ -4,14 +4,18 @@ import { GlobalContext } from "@/context";
 import { useContext } from "react";
 import ComponentLevelLoader from "./ComponentLoader";
 import Notification from "./Notification";
+import { toast } from "react-toastify";
+import { addToCart } from "@/services/cart";
 
 export default function CommonDetails({ item }) {
+
     const {
         setComponentLevelLoader,
         componentLevelLoader,
         user,
         setShowCartModal,
     } = useContext(GlobalContext);
+
 
     async function handleAddToCart(getItem) {
         setComponentLevelLoader({ loading: true, id: "" });
@@ -95,7 +99,7 @@ export default function CommonDetails({ item }) {
                             </div>
                             <button
                                 type="button"
-                                // onClick={() => handleAddToCart(item)}
+                                onClick={() => handleAddToCart(item)}
                                 className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium tracking-wide uppercase text-white"
                             >
                                 {componentLevelLoader && componentLevelLoader.loading ? (
