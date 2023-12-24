@@ -3,8 +3,8 @@ import mongoose from "mongoose";
 
 const connect = async () => {
     const url = process.env.MONGO_URI;
-    mongoose.connect(url).then(() => console.log("Database connected successfully!")).catch((e)=>
-    console.log(`Getting Error from DB connection ${err.message}`)
+    mongoose.connect(url).then(() => console.log("Database connected successfully!")).catch((e) =>
+        console.log(`Getting Error from DB connection ${err.message}`)
     )
 }
 

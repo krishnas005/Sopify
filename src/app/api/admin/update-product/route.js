@@ -1,57 +1,70 @@
 import { NextResponse } from "next/server";
 import connect from '@/database'
 import Product from "@/models/product";
+import AuthUser from "@/middleware/AuthUser";
 
 export const dynamic = "force-dynamic";
 
 export async function PUT(req) {
+
     try {
 
         await connect();
-        const data = await req.json();
+        const isAuthUser = await AuthUser(req);
 
-        const {
-            _id,
-            name,
-            price,
-            description,
-            category,
-            sizes,
-            deliveryInfo,
-            onSale,
-            priceDrop,
-            imageUrl
-        } = data;
+        if (isAuthUser?.role === "admin") {
 
-        const updatedProduct = await Product.findOneAndUpdate({
-            _id:_id,
-        },
-        {
-            name,
-            price,
-            description,
-            category,
-            sizes,
-            deliveryInfo,
-            onSale,
-            priceDrop,
-            imageUrl
-        },
-        {new:true}
-        );
+            const data = await req.json();
 
-        if(updatedProduct) {
-            return NextResponse.json({
-                success: true,
-                message: "Product updated successfully!"
-            })
+            const {
+                _id,
+                name,
+                price,
+                description,
+                category,
+                sizes,
+                deliveryInfo,
+                onSale,
+                priceDrop,
+                imageUrl
+            } = data;
+
+            const updatedProduct = await Product.findOneAndUpdate({
+                _id: _id,
+            },
+                {
+                    name,
+                    price,
+                    description,
+                    category,
+                    sizes,
+                    deliveryInfo,
+                    onSale,
+                    priceDrop,
+                    imageUrl
+                },
+                { new: true }
+            );
+
+            if (updatedProduct) {
+                return NextResponse.json({
+                    success: true,
+                    message: "Product updated successfully!"
+                })
+            } else {
+                return NextResponse.json({
+                    success: false,
+                    message: "Failed to update the product!"
+                })
+            }
         } else {
             return NextResponse.json({
                 success: false,
-                message: "Failed to update the product!"
+                message: "You are not authenticated!"
             })
         }
-    } catch(e) {
+
+    } catch (e) {
         console.log(e);
         return NextResponse.json({
             success: false,
