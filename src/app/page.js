@@ -1,14 +1,16 @@
 'use client'
 
 import { GlobalContext } from "@/context"
-import { useContext } from "react"
+import { useContext, useState } from "react"
 
 export default function Home() {
   const {isAuthUser} = useContext(GlobalContext);
+  const [products, setProducts] = useState([]);
+  
   return (
     <main>
       <div>
-        {/* 2:39 */}
+        Hello World!
       </div>
     </main>
   )
