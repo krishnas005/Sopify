@@ -13,10 +13,10 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body>
         <GlobalState>
-          <Navbar/>
-        <main className="flex min-h-screen flex-col mt-[84px]">
-          {children}
-        </main>
+          <Navbar />
+          <main className="flex min-h-screen flex-col mt-[75px]">
+            {children}
+          </main>
         </GlobalState>
       </body>
     </html>

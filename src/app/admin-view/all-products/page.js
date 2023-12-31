@@ -3,7 +3,7 @@ import { getAllAdminProducts } from "@/services/product";
 
 export default async function AdminAllProducts() {
     const allAdminProducts = await getAllAdminProducts();
-    console.log(allAdminProducts)
+    // console.log(allAdminProducts)
     return (
         <div>
             <CommonList data={allAdminProducts && allAdminProducts.data}/>

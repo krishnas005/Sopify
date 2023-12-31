@@ -15,7 +15,7 @@ export default function ProductTile({ item }) {
                     className="h-full w-full object-cover transition-all duration-300 group-hover:scale-125"
                     width={50}
                     height={100}
-                    onClick={()=>router.push(`/product/${item._id}`)}
+                    onClick={() => router.push(`/product/${item._id}`)}
                 />
             </div>
             {item.onSale === "yes" ? (

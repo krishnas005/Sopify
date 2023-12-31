@@ -21,7 +21,6 @@ export default function CommonList({ data }) {
                             data.map((item) => (
                                 <article className="relative flex flex-col  cursor-pointer overflow-hidden"
                                 key={item._id}
-                                
                                 >
                                     <ProductTile item={item} />
                                     <ProductButton item={item} />
@@ -29,7 +28,6 @@ export default function CommonList({ data }) {
                             )) : null
                     }
                 </div>
-
             </div>
             <Notification />
         </section>

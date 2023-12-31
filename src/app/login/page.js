@@ -49,7 +49,6 @@ const Page = () => {
             Cookies.set('token', res?.finalData?.token);
             localStorage.setItem('user', JSON.stringify(res?.finalData?.user))
             setComponentLevelLoader({ loading: false, id: "" });
-            router.push('/')
         } else {
             toast.error(res.message, {
                 position: toast.POSITION.TOP_RIGHT,

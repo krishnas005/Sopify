@@ -11,7 +11,7 @@ import { addToCart } from "@/services/cart";
 
 export default function ProductButton({ item }) {
     const path = usePathname();
-    const { setCurrentUpdatedProduct, setComponentLevelLoader, user, componentLevelLoader, showCartModal,setShowCartModal } = useContext(GlobalContext);
+    const { setCurrentUpdatedProduct, setComponentLevelLoader, user, componentLevelLoader, setShowCartModal } = useContext(GlobalContext);
     const router = useRouter();
 
     async function handleDeleteProduct(item) {

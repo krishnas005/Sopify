@@ -8,25 +8,28 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 import CartModal from "./CartModal";
+import { FaCartShopping } from "react-icons/fa6";
+
 
 
 
 function NavItems({ isModalView = false, isAdminView }) {
+    const path = usePathname();
     const router = useRouter();
     return (
         <div className={`items-center justify-between w-full md:flex md:w-auto ${isModalView ? "" : "hidden"}`} id="nav-items">
-            <ul className={`flex flex-col gap-3 p-4 md_p-0 mt-4 font-medium rounded-lg md:flex-row md:space-x-8 md:mt-0 md:border-0 bg-white ${isModalView ? "border-none" : "border border-gray-100"}`}>
+            <ul className={`flex flex-col gap-0 lg:gap-3 mt-4 xl:ml-8 font-medium rounded-lg md:flex-row md:space-x-8 md:mt-0 md:border-0 bg-white ${isModalView ? "border-none" : "border border-gray-100"}`}>
                 {
                     isAdminView ? adminNavOptions.map(items =>
                         <li
-                            className="cursor-pointer block py-2 pl-3 pr-4 text-gray-900 rounded md:p-0 "
+                            className={`cursor-pointer block py-2 pl-3 pr-4 text-gray-700 rounded md:p-0 ${path === items.path ? "text-bold" : " "}`}
                             key={items.id}
                             onClick={() => router.push(items.path)}
                         >
                             {items.label}
                         </li>) :
                         navOptions.map(items =>
-                            <li className="cursor-pointer block py-2 pl-3 pr-4 text-gray-900 rounded md:p-0 hover:underline"
+                            <li className={`cursor-pointer block py-2 pl-3 pr-4 text-gray-900 rounded md:p-0 ${path === items.path ? "underline" : " "}`}
                                 key={items.id}
                                 onClick={() => router.push(items.path)}
                             >
@@ -71,27 +74,28 @@ export default function Navbar() {
                             <Link href="/">Sopify</Link>
                         </span>
                     </div>
-                    <div className="flex md:order-2 gap-4">
-                        {!isAdminView && isAuthUser ?
-                            <Fragment>
-                                <button onClick={()=> router.push('/account')}>Account</button>
-                                <button onClick={()=> setShowCartModal(true)}>Cart</button>
-                            </Fragment>
-                            : null}
+                    <div className="flex md:order-2 lg:gap-5 gap-3 text-[12px] md:px-5 md:py-3 md:text-[16px]">
                         {
                             user?.role === 'admin' ?
                                 isAdminView ? <button onClick={() => router.push('/')}>Client View</button> : <button onClick={() => router.push('/admin-view')}>Admin View</button>
                                 : null
                         }
+                        {!isAdminView && isAuthUser ?
+                            <Fragment>
+                                <button onClick={() => router.push('/account')}>Account</button>
+                                <button onClick={() => setShowCartModal(true)}><FaCartShopping size={26} /></button>
+                            </Fragment>
+                            : null}
+
                         {
                             isAuthUser ? <button
-                                className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium uppercase tracking-wide text-white"
+                                className="mt-1.5 inline-block bg-black px-3 py-1  text-[10px] md:px-5 md:py-3 lg:text-xs font-medium uppercase tracking-wide text-white "
                                 onClick={handleLogout}>
                                 Logout
                             </button>
                                 :
                                 <button
-                                    className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium uppercase tracking-wide text-white"
+                                    className="mt-1.5 inline-block bg-black px-3 py-1  text-[10px] md:px-5 md:py-3 lg:text-xs font-medium uppercase tracking-wide text-white"
                                     onClick={handleLogin}>
                                     Login
                                 </button>
@@ -132,7 +136,7 @@ export default function Navbar() {
             {
                 showCartModal &&
                 <CartModal
-                
+
                 />
             }
         </>

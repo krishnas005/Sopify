@@ -12,6 +12,7 @@ import { PulseLoader } from "react-spinners";
 import { toast } from "react-toastify";
 
 export default function Account() {
+    
     const {
         user,
         addresses,
@@ -23,7 +24,6 @@ export default function Account() {
         pageLevelLoader,
         setPageLevelLoader,
     } = useContext(GlobalContext);
-
 
 
     const [showAddressForm, setShowAddressForm] = useState(false);

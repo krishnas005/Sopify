@@ -1,4 +1,4 @@
-import mongoose,{Schema} from 'mongoose';
+import mongoose, { Schema } from 'mongoose';
 
 
 const CartSchema = new Schema({
@@ -16,9 +16,9 @@ const CartSchema = new Schema({
         default: 1
     }
 },
-    {timestamps: true}
+    { timestamps: true }
 )
 
-const Cart = mongoose.models.Cart || mongoose.model("Cart",CartSchema);
+const Cart = mongoose.models.Cart || mongoose.model("Cart", CartSchema);
 
 export default Cart;
