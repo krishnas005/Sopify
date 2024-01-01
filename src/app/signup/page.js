@@ -16,14 +16,17 @@ const initialForm = {
     name: '',
     email: '',
     password: '',
-    role: 'customer'
+    role: 'customer',
+    adminPassword: ''
 }
 
 const Page = () => {
 
     const router = useRouter();
     const [isRegistered, setIsRegistered] = useState(false);
+    const [adminPasswordField, setAdminPasswordField] = useState(false);
     const { pageLevelLoader, setPageLevelLoader, isAuthUser } = useContext(GlobalContext);
+    const adminPassword = "kannus05";
 
     const [formData, setFormData] = useState(initialForm);
 
@@ -40,28 +43,39 @@ const Page = () => {
     }
 
     async function handleRegister(e) {
-        setPageLevelLoader(true);
-        const data = await signUp(formData);
+        
+        setPageLevelLoader(true)
 
-        if (data.success) {
-            toast.success(data.message, {
+        if (adminPasswordField && formData.adminPassword !== "kannus05") {
+            setPageLevelLoader(false)
+            toast.error("Invalid Admin Authentication password!", {
                 position: toast.POSITION.TOP_RIGHT,
             });
-            setIsRegistered(true);
-            setPageLevelLoader(false);
-            setFormData(initialForm);
+            
         } else {
-            toast.error(data.message, {
-                position: toast.POSITION.TOP_RIGHT,
-            });
-            setPageLevelLoader(false);
-            setFormData(initialForm);
+            const data = await signUp(formData);
+
+            if (data.success) {
+                toast.success(data.message, {
+                    position: toast.POSITION.TOP_RIGHT,
+                });
+                setIsRegistered(true);
+                setPageLevelLoader(false);
+                setFormData(initialForm);
+            } else {
+                toast.error(data.message, {
+                    position: toast.POSITION.TOP_RIGHT,
+                });
+                setPageLevelLoader(false);
+                setFormData(initialForm);
+            }
         }
     }
 
     useEffect(() => {
         if (isAuthUser) router.push("/");
     }, [isAuthUser]);
+
 
     // console.log(formData)
 
@@ -96,14 +110,38 @@ const Page = () => {
                                                 key={controlItem.label}
                                                 value={formData[controlItem.id]}
                                                 onChange={(e) => {
+                                                    // console.log(e.target.value)
+                                                    const selectedValue = e.target.value;
                                                     setFormData({
                                                         ...formData,
                                                         [controlItem.id]: e.target.value,
                                                     })
+                                                    if (selectedValue === "admin") {
+                                                        setAdminPasswordField(true)
+                                                    } else {
+                                                        setAdminPasswordField(false)
+                                                    }
                                                 }}
                                             />
                                         ) : null
                                     )}
+                                {
+                                    adminPasswordField ? (
+                                        <InputComponent
+                                            type="password"
+                                            placeholder="Enter Admin Password"
+                                            label="Admin Password"
+                                            key="adminPassword"
+                                            value={formData.adminPassword}
+                                            onChange={(e) => {
+                                                setFormData({
+                                                    ...formData,
+                                                    adminPassword: e.target.value,
+                                                });
+                                            }}
+                                        />
+                                    ) : ""
+                                }
                                 <button
                                     className="disabled:opacity-50 inline-flex w-full items-center justify-center bg-black px-6 py-4 text-lg text-white transition-all duration-200 ease-in-out focus:shadow font-medium uppercase tracking-wide"
                                     disabled={!isFormValid()}

@@ -40,6 +40,7 @@ export default function GlobalState({ children }) {
     const [showCartModal, setShowCartModal] = useState(false)
     const [cartItems, setCartItems] = useState([])
     const [addresses, setAddresses] = useState([])
+
     const [addressFormData, setAddressFormData] = useState({
         fullName: '',
         city: '',
