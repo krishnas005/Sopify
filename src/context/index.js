@@ -71,7 +71,7 @@ export default function GlobalState({ children }) {
 
     useEffect(() => {
         if (
-            path !== "/register" &&
+            path !== "/signup" &&
             !path.includes("product") &&
             path !== "/" &&
             user &&
