@@ -22,14 +22,14 @@ function NavItems({ isModalView = false, isAdminView }) {
                 {
                     isAdminView ? adminNavOptions.map(items =>
                         <li
-                            className={`cursor-pointer block py-2 pl-3 pr-4 text-gray-700 rounded md:p-0 ${path === items.path ? "text-bold" : " "}`}
+                            className={`cursor-pointer block py-2 pl-3 pr-4 text-gray-700 rounded md:p-0 ${path === items.path ? "text-bold" : " "} ${isModalView ? "hover:bg-slate-400" : ""} `}
                             key={items.id}
                             onClick={() => router.push(items.path)}
                         >
                             {items.label}
                         </li>) :
                         navOptions.map(items =>
-                            <li className={`cursor-pointer block py-2 pl-3 pr-4 text-gray-900 rounded md:p-0 ${path === items.path ? "underline" : " "}`}
+                            <li className={`cursor-pointer block py-2 pl-3 pr-4 text-gray-900 rounded md:p-0 ${path === items.path ? "underline" : " "} ${isModalView ? "hover:bg-slate-400" : ""}`}
                                 key={items.id}
                                 onClick={() => router.push(items.path)}
                             >
@@ -56,13 +56,9 @@ export default function Navbar() {
     function handleLogout() {
         setIsAuthUser(false);
         setUser(null);
-        Cookies.remove('token')
-        localStorage.clear()
-        router.push('/')
-    }
-
-    function handleLogin() {
-        router.push('/login')
+        Cookies.remove('token');
+        localStorage.clear();
+        router.push('/');
     }
 
     return (
@@ -89,14 +85,14 @@ export default function Navbar() {
 
                         {
                             isAuthUser ? <button
-                                className="mt-1.5 inline-block bg-black px-3 py-1  text-[10px] md:px-5 md:py-3 lg:text-xs font-medium uppercase tracking-wide text-white "
+                                className=" inline-block bg-black px-3 py-1  text-[10px] md:px-5 md:py-3 lg:text-xs font-medium uppercase tracking-wide text-white "
                                 onClick={handleLogout}>
                                 Logout
                             </button>
                                 :
                                 <button
-                                    className="mt-1.5 inline-block bg-black px-3 py-1  text-[10px] md:px-5 md:py-3 lg:text-xs font-medium uppercase tracking-wide text-white"
-                                    onClick={handleLogin}>
+                                    className=" inline-block bg-black px-3  text-[10px] md:px-5 md:py-3 lg:text-xs font-medium uppercase tracking-wide text-white"
+                                    onClick={() => router.push('/login')}>
                                     Login
                                 </button>
                         }
@@ -106,7 +102,7 @@ export default function Navbar() {
                             className="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
                             aria-controls="navbar-sticky"
                             aria-expanded="false"
-                            onClick={() => setShowNavModal(true)}
+                            onClick={() => setShowNavModal(!showNavModal)}
                         >
                             <span className="sr-only">Open main menu</span>
                             <svg
@@ -136,7 +132,6 @@ export default function Navbar() {
             {
                 showCartModal &&
                 <CartModal
-
                 />
             }
         </>

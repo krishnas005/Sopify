@@ -26,7 +26,6 @@ const Page = () => {
     const [isRegistered, setIsRegistered] = useState(false);
     const [adminPasswordField, setAdminPasswordField] = useState(false);
     const { pageLevelLoader, setPageLevelLoader, isAuthUser } = useContext(GlobalContext);
-    const adminPassword = "kannus05";
 
     const [formData, setFormData] = useState(initialForm);
 

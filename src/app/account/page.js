@@ -125,11 +125,11 @@ export default function Account() {
                 <div className="bg-white shadow">
                     <div className="p-6 sm:p-12">
                         <div className="flex flex-col flex-1">
-                            <h4 className="text-lg font-semibold text-center md:text-left">
-                                {user?.name}
+                            <h4 className="text-lg font-semibold ">
+                                Name: {user?.name}
                             </h4>
-                            <p>{user?.email}</p>
-                            <p>{user?.role}</p>
+                            <p className="text-lg ">Email: {user?.email}</p>
+                            <p className="text-lg ">Role: <span className="uppercase">{user?.role}</span></p>
                         </div>
                         <button onClick={() => router.push('/order')} className="mt-5  inline-block bg-black text-white px-5 py-3 text-xs font-medium uppercase tracking-wide">
                             View Your Orders
