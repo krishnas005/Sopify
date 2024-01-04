@@ -12,13 +12,10 @@ export default function Home() {
   return (
     <main>
       <div className="bg-black">
-      <div className="relative h-auto xl:h-[675px] opacity-90">
+      <div className="relative h-auto xl:h-[679px] opacity-90">
         <Image src={Banner} alt="Banner Image" className=" w-full h-full" />
       </div>
       </div>
-
-
-
     </main>
   )
 }
