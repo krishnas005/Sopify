@@ -4,7 +4,7 @@ export const signUp = async(formData) => {
 
     try {
         // const res = await fetch('http://localhost:3000/api/signup', {
-        const res = await fetch('https://sopify-lac.vercel.app/signup', {
+        const res = await fetch('https://sopify-lac.vercel.app/api/signup', {
             method: "POST",
             headers: {
                 "Content-Type" : "application/json",
