@@ -11,9 +11,9 @@ import { addNewProduct, updateAProduct } from "@/services/product";
 import {
     AvailableSizes,
     adminAddProductformControls,
-    firebaseConfig,
     firebaseStorageURL,
 } from "@/utils";
+import { firebaseConfig } from "../../../utils";
 import { initializeApp } from "firebase/app";
 import {
     getDownloadURL,
