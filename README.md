@@ -3,12 +3,12 @@
 This is a full-stack e-commerce website built using Next.js, TailwindCSS, and MongoDB. The website includes all essential e-commerce features such as product listing, cart functionality, and an admin panel for managing products and orders.
 
 ## Features
-User Authentication (Sign Up, Sign In, Sign Out)
-Product Listing and Detail Pages
-Shopping Cart
-Order Management
-Admin Panel for Managing Products and Orders
-Responsive Design
+1. User Authentication (Sign Up, Sign In, Sign Out)
+2. Product Listing and Detail Pages
+3. Shopping Cart
+4. Order Management
+5. Admin Panel for Managing Products and Orders
+6. Responsive Design
 
 ## Technologies Used
 ### Frontend:
